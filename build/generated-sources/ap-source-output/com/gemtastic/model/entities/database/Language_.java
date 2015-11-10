@@ -7,7 +7,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-11-10T16:53:32")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-11-10T20:16:43")
 @StaticMetamodel(Language.class)
 public class Language_ { 
 

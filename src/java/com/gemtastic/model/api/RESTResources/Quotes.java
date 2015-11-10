@@ -184,37 +184,4 @@ public class Quotes {
     public Comments getComments() {
         return rc.getResource(Comments.class);
     }
-    
-//    @GET
-//    @Path("/test") 
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response test(){
-//        
-//        Quote q = new Quote();
-//        Graphic g = new Graphic();
-//        g.setFormat("format");
-//        g.setId(1);
-//        g.setPrice(0);
-//        g.setQuote(q);
-//        g.setSize(1);
-//        g.setTimeest(0);
-//        
-//        GraphicWrapper gw = new GraphicWrapper();
-//        gw.setGraphic(g);
-//        gw.setLink(new Link("A", "B"));
-//        List<ProductWrapper> pws = new ArrayList<>();
-//        List<CommentWrapper> cws = new ArrayList<>();
-//        List<ProductInterface> pl = new ArrayList<>();
-//        
-//        pl.add(gw);
-//        ProductWrapper pw = new ProductWrapper(null, new Link("X", "self"));
-//        pws.add(pw);
-//        
-//        QuoteWrapper quoteW = new QuoteWrapper(q, cws, pws, new Link("A", "self"));
-//        return Response.status(Status.OK).entity(quoteW).build();
-//    }
-//    
-//    private int generateHash(){
-//        return 0;
-//    }
 }
