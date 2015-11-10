@@ -10,10 +10,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Gemtastic
  */
 @XmlRootElement
-public class WebshopWrapper implements ProductInterface {
+public class WebshopWrapper implements ProductInterface<Webshop> {
     
     String type;
-    Webshop webshop;
+    Webshop product;
     Link link;
 
     public WebshopWrapper() {
@@ -21,7 +21,7 @@ public class WebshopWrapper implements ProductInterface {
 
     public WebshopWrapper(Webshop webshop, Link link) {
         this.type = "Webshop";
-        this.webshop = webshop;
+        this.product = webshop;
         this.link = link;
     }
 
@@ -29,12 +29,14 @@ public class WebshopWrapper implements ProductInterface {
         return type;
     }
 
-    public Webshop getWebshop() {
-        return webshop;
+    @Override
+    public Webshop getProduct() {
+        return product;
     }
 
-    public void setWebshop(Webshop webshop) {
-        this.webshop = webshop;
+    @Override
+    public void setProduct(Webshop webshop) {
+        this.product = webshop;
     }
 
     public Link getLink() {

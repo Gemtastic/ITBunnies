@@ -15,10 +15,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Gemtastic
  */
 @XmlRootElement
-public class GraphicWrapper implements ProductInterface {
+public class GraphicWrapper implements ProductInterface<Graphic> {
 
     String type;
-    Graphic graphic;
+    Graphic product;
     Link link;
 
     
@@ -27,17 +27,14 @@ public class GraphicWrapper implements ProductInterface {
     }
 
     public GraphicWrapper(Graphic graphic, Link link) {
-        this.graphic = graphic;
+        this.product = graphic;
         this.link = link;
         this.type = "Graphic";
     }
 
-    public Graphic getGraphic() {
-        return graphic;
-    }
-
-    public void setGraphic(Graphic graphic) {
-        this.graphic = graphic;
+    @Override
+    public Graphic getProduct() {
+        return product;
     }
 
     public Link getLink() {
@@ -51,5 +48,9 @@ public class GraphicWrapper implements ProductInterface {
     public String getType() {
         return type;
     }
-    
+
+    @Override
+    public void setProduct(Graphic product) {
+        this.product = product;
+    }
 }

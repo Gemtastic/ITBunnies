@@ -11,30 +11,30 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Wraps the different types of products into one list.
+ * Wraps the different types of product into one list.
  * 
  * @author Gemtastic
  */
 @XmlRootElement
 public class ProductWrapper {
     
-    private List<ProductInterface> products;
+    private ProductInterface product;
     Link link;
 
     public ProductWrapper() {
     }
 
-    public ProductWrapper(List<ProductInterface> products, Link link) {
-        this.products = products;
+    public ProductWrapper(ProductInterface products, Link link) {
+        this.product = products;
         this.link = link;
     }
 
-    public List<ProductInterface> getProducts() {
-        return products;
+    public ProductInterface getProduct() {
+        return product;
     }
 
-    public void setProducts(List<ProductInterface> products) {
-        this.products = products;
+    public void setProduct(ProductInterface products) {
+        this.product = products;
     }
 
     public Link getLink() {

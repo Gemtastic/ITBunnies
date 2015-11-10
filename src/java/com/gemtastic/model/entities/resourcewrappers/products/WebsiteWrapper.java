@@ -10,27 +10,29 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Gemtastic
  */
 @XmlRootElement
-public class WebsiteWrapper implements ProductInterface {
+public class WebsiteWrapper implements ProductInterface<Website> {
     
     String type;
-    Website website;
+    Website product;
     Link link;
 
     public WebsiteWrapper() {
     }
 
     public WebsiteWrapper(Website website, Link link) {
-        this.website = website;
+        this.product = website;
         this.link = link;
         this.type = "Website";
     }
 
-    public Website getWebsite() {
-        return website;
+    @Override
+    public Website getProduct() {
+        return product;
     }
 
-    public void setWebsite(Website website) {
-        this.website = website;
+    @Override
+    public void setProduct(Website product) {
+        this.product = product;
     }
 
     public Link getLink() {

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -40,7 +41,7 @@ public class QuoteManager {
      * @return
      */
     public List<QuoteWrapper> getAllQuotes(){
-        List<Quote> quotes = em.createNamedQuery("Query.findAll", Quote.class).getResultList();
+        List<Quote> quotes = em.createNamedQuery("Quote.findAll", Quote.class).getResultList();
         List<QuoteWrapper> wrappedQuotes = wrapQuotes(quotes);
         return wrappedQuotes;
     }
@@ -52,12 +53,9 @@ public class QuoteManager {
      * @return QuoteWrapper
      */
     public QuoteWrapper getQuoteById(int id){
-//        List<Quote> quotes = new ArrayList<>();
-//        Quote quote = em.find(Quote.class, id);
-        Quote q = new Quote();
-        q.setId(id);
-        List<Quote> quotes = em.createNamedQuery("Quote.findById", Quote.class).setParameter("id", q.getId()).getResultList();
-//        quotes.add(quote);
+
+        List<Quote> quotes = em.createNamedQuery("Quote.findById", Quote.class).setParameter("id", id).getResultList();
+
         List<QuoteWrapper> wrapped = wrapQuotes(quotes);
         
         if(!wrapped.isEmpty()){
@@ -67,12 +65,31 @@ public class QuoteManager {
         }
     }
     
+    public void deleteQuoteById(int id) {
+        Quote quote = em.find(Quote.class, id);
+        if(quote != null){
+            em.remove(quote);
+        }
+    }
+    
+    public QuoteWrapper upsertQuote(Quote quote) {
+        List<Quote> quotes = new ArrayList<>();
+        
+        Quote q = em.merge(quote);
+        if(q != null){
+            quotes.add(q);
+            List<QuoteWrapper> wrapped = wrapQuotes(quotes);
+            return wrapped.get(0);
+        }
+        return null;
+    }
+    
     private List<QuoteWrapper> wrapQuotes(List<Quote> quotes){
         List<QuoteWrapper> wrapped = new ArrayList<>();
         for(Quote q: quotes){
-            List<CommentWrapper> comments = cm.getAllCommentsOff(q);
+            List<CommentWrapper> comments = cm.getAllCommentsOff(q.getId());
             List<ProductWrapper> products = pm.getAllProductsOff(q);
-            QuoteWrapper wrapper = new QuoteWrapper(q, comments, products, new Link(null, "self"));
+            QuoteWrapper wrapper = new QuoteWrapper(q, comments, products, null);
             wrapped.add(wrapper);
         }
          return wrapped;

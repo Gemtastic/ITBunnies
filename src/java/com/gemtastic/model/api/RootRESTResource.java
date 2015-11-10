@@ -14,15 +14,15 @@ import javax.ws.rs.core.Context;
 public class RootRESTResource {
     
     @Context
-    ResourceContext q;
+    ResourceContext rc;
     
     @Path("/quotes")
     public Quotes getQuotesResource(){
-        return q.getResource(Quotes.class);
+        return rc.getResource(Quotes.class);
     }
     
     @Path("/products")
     public Products getProductsResource(){
-        return new Products();
+        return rc.getResource(Products.class);
     }
 }

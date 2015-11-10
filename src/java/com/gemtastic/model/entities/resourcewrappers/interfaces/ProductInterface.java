@@ -8,7 +8,9 @@ package com.gemtastic.model.entities.resourcewrappers.interfaces;
 /**
  *
  * @author Gemtastic
+ * @param <T>
  */
-public interface ProductInterface {
-    
+public interface ProductInterface<T> {
+     public T getProduct();
+     public void setProduct(T product);
 }
