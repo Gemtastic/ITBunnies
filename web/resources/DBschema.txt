@@ -1,0 +1,79 @@
+CREATE DATABASE bunnies owner app;
+
+\c bunnies
+
+CREATE TABLE quote (
+    id SERIAL PRIMARY KEY NOT NULL,
+    queryDate DATE NOT NULL,
+    quoteSum INTEGER NOT NULL
+);
+
+CREATE TABLE graphicsType (
+    id SERIAL PRIMARY KEY NOT NULL,
+    type TEXT NOT NULL,
+    UNIQUE (type)
+);
+
+CREATE TABLE websiteType (
+    id SERIAL PRIMARY KEY NOT NULL,
+    website TEXT NOT NULL,
+    UNIQUE (website)
+);
+
+CREATE TABLE language (
+    id SERIAL PRIMARY KEY NOT NULL,
+    language TEXT NOT NULL,
+    UNIQUE (language)
+);
+
+CREATE TABLE comment (
+    id SERIAL PRIMARY KEY NOT NULL,
+    created DATE NOT NULL,
+    message TEXT NOT NULL,
+    author TEXT NOT NULL,
+    quote INTEGER NOT NULL REFERENCES quote
+);
+
+CREATE TABLE graphic (
+    id SERIAL PRIMARY KEY NOT NULL,
+    format TEXT NOT NULL,
+    size INTEGER NOT NULL,
+    type INTEGER NOT NULL REFERENCES graphicsType,
+    price INTEGER NOT NULL,
+    timeEst INTEGER NOT NULL,
+    quote INTEGER NOT NULL REFERENCES quote
+);
+
+CREATE TABLE website (
+    id SERIAL PRIMARY KEY NOT NULL,
+    pages INTEGER NOT NULL,
+    type INTEGER NOT NULL REFERENCES websiteType,
+    language INTEGER NOT NULL REFERENCES language,
+    price INTEGER NOT NULL,
+    timeEst INTEGER NOT NULL,
+    quote INTEGER NOT NULL REFERENCES quote
+);
+
+CREATE TABLE webshop (
+    id SERIAL PRIMARY KEY NOT NULL,
+    login BOOLEAN NOT NULL,
+    paymentSys TEXT NOT NULL,
+    language INTEGER NOT NULL REFERENCES language,
+    database TEXT NOT NULL,
+    price INTEGER NOT NULL,
+    timeEST INTEGER NOT NULL,
+    quote INTEGER NOT NULL REFERENCES quote
+);
+
+
+-- CREATE TABLE productType (
+--    id SERIAL PRIMARY KEY NOT NULL,
+--    type TEXT NOT NULL,
+--    UNIQUE (type)
+--);
+
+--CREATE TABLE product (
+--    id SERIAL PRIMARY KEY NOT NULL,
+--    quote INTEGER NOT NULL REFERENCES quote,
+--    type INTEGER NOT NULL REFERENCES productType
+--);
